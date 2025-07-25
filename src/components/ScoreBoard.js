@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ScoreBoard = ({ xWins, oWins, draws }) => {
+const ScoreBoard = React.memo(({ xWins, oWins, draws }) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md mx-auto">
       <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
@@ -22,6 +22,8 @@ const ScoreBoard = ({ xWins, oWins, draws }) => {
       </div>
     </div>
   );
-};
+});
+
+ScoreBoard.displayName = 'ScoreBoard';
 
 export default ScoreBoard; 

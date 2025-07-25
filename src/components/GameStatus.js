@@ -1,6 +1,7 @@
 import React from 'react';
+import { getStatusColor } from '../utils/gameUtils';
 
-const GameStatus = ({ currentPlayer, winner, isDraw, onReset }) => {
+const GameStatus = React.memo(({ currentPlayer, winner, isDraw, onReset }) => {
   const getStatusMessage = () => {
     if (winner) {
       return `🎉 Player ${winner} Wins!`;
@@ -11,19 +12,9 @@ const GameStatus = ({ currentPlayer, winner, isDraw, onReset }) => {
     return `Current Player: ${currentPlayer}`;
   };
 
-  const getStatusColor = () => {
-    if (winner) {
-      return winner === 'X' ? 'text-blue-600' : 'text-red-500';
-    }
-    if (isDraw) {
-      return 'text-gray-600';
-    }
-    return currentPlayer === 'X' ? 'text-blue-600' : 'text-red-500';
-  };
-
   return (
     <div className="text-center mb-8">
-      <h2 className={`text-2xl font-bold mb-4 ${getStatusColor()}`}>
+      <h2 className={`text-2xl font-bold mb-4 ${getStatusColor(winner, isDraw, currentPlayer)}`}>
         {getStatusMessage()}
       </h2>
       <button
@@ -36,6 +27,8 @@ const GameStatus = ({ currentPlayer, winner, isDraw, onReset }) => {
       </button>
     </div>
   );
-};
+});
+
+GameStatus.displayName = 'GameStatus';
 
 export default GameStatus; 
